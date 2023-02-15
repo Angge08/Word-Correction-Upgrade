@@ -14,3 +14,21 @@ window = sg.Window('Word Correction', layout)
 def clear_inputs():
     for key in values:
         window['-IN-'].update('')
+
+while True:
+    event, values = window.read()
+    if event in (sg.WIN_CLOSED or 'Exit'):
+        break
+    if event == 'Corrected Word':
+        a = values ['-IN-']
+        b = Word(a)
+        window['-OUT-'].update(b.spellcheck())
+
+    if event == 'Clear':
+        clear_inputs()
+    if event == 'Speak':
+        say_word = a
+        engine.say(say_word)
+        engine.runAndWait()
+
+window.close()
